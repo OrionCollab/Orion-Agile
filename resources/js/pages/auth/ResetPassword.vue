@@ -1,11 +1,5 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { LoaderCircle } from 'lucide-vue-next';
 
 interface Props {
     token: string;
@@ -31,51 +25,49 @@ const submit = () => {
 </script>
 
 <template>
-    <AuthLayout title="Reset password" description="Please enter your new password below">
+    <div class="flex flex-col items-center justify-center min-h-screen px-6">
+
         <Head title="Reset password" />
 
-        <form @submit.prevent="submit">
-            <div class="grid gap-6">
-                <div class="grid gap-2">
-                    <Label for="email">Email</Label>
-                    <Input id="email" type="email" name="email" autocomplete="email" v-model="form.email" class="mt-1 block w-full" readonly />
-                    <InputError :message="form.errors.email" class="mt-2" />
+        <div class="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-center">Reset password</h2>
+            <p class="mb-6 text-sm text-center text-gray-600">
+                Please enter your new password below
+            </p>
+
+            <form @submit.prevent="submit" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium">Email</label>
+                    <input id="email" type="email" v-model="form.email"
+                        class="w-full p-2 mt-1 border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                        readonly />
+                    <p v-if="form.errors.email" class="mt-1 text-sm text-red-600">{{ form.errors.email }}</p>
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="password">Password</Label>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        autocomplete="new-password"
-                        v-model="form.password"
-                        class="mt-1 block w-full"
-                        autofocus
-                        placeholder="Password"
-                    />
-                    <InputError :message="form.errors.password" />
+                <div>
+                    <label for="password" class="block text-sm font-medium">Password</label>
+                    <input id="password" type="password" v-model="form.password"
+                        class="w-full p-2 mt-1 border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                        autofocus placeholder="Password" />
+                    <p v-if="form.errors.password" class="mt-1 text-sm text-red-600">{{ form.errors.password }}</p>
                 </div>
 
-                <div class="grid gap-2">
-                    <Label for="password_confirmation"> Confirm Password </Label>
-                    <Input
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        autocomplete="new-password"
-                        v-model="form.password_confirmation"
-                        class="mt-1 block w-full"
-                        placeholder="Confirm password"
-                    />
-                    <InputError :message="form.errors.password_confirmation" />
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium">Confirm Password</label>
+                    <input id="password_confirmation" type="password" v-model="form.password_confirmation"
+                        class="w-full p-2 mt-1 border-gray-300 rounded shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                        placeholder="Confirm password" />
+                    <p v-if="form.errors.password_confirmation" class="mt-1 text-sm text-red-600">{{
+                        form.errors.password_confirmation }}</p>
                 </div>
 
-                <Button type="submit" class="mt-4 w-full" :disabled="form.processing">
-                    <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
+                <button type="submit"
+                    class="w-full px-4 py-2 font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 disabled:bg-gray-400"
+                    :disabled="form.processing">
+                    <span v-if="form.processing" class="mr-2 animate-spin">⏳</span>
                     Reset password
-                </Button>
-            </div>
-        </form>
-    </AuthLayout>
+                </button>
+            </form>
+        </div>
+    </div>
 </template>

@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import Heading from '@/components/Heading.vue';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3'
 
-const sidebarNavItems: NavItem[] = [
+const sidebarNavItems = [
     {
         title: 'Profile',
         href: '/settings/profile',
@@ -13,11 +9,7 @@ const sidebarNavItems: NavItem[] = [
     {
         title: 'Password',
         href: '/settings/password',
-    },
-    {
-        title: 'Appearance',
-        href: '/settings/appearance',
-    },
+    }
 ];
 
 const currentPath = window.location.pathname;
@@ -25,26 +17,21 @@ const currentPath = window.location.pathname;
 
 <template>
     <div class="px-4 py-6">
-        <Heading title="Settings" description="Manage your profile and account settings" />
+        <h1 class="text-2xl font-bold">Settings</h1>
+        <p class="text-gray-600">Manage your profile and account settings</p>
 
         <div class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-x-12 lg:space-y-0">
             <aside class="w-full max-w-xl lg:w-48">
                 <nav class="flex flex-col space-x-0 space-y-1">
-                    <Button
-                        v-for="item in sidebarNavItems"
-                        :key="item.href"
-                        variant="ghost"
-                        :class="['w-full justify-start', { 'bg-muted': currentPath === item.href }]"
-                        as-child
-                    >
-                        <Link :href="item.href">
-                            {{ item.title }}
-                        </Link>
-                    </Button>
+                    <Link v-for="item in sidebarNavItems" :key="item.href" :href="item.href"
+                        class="block w-full px-4 py-2 text-left transition-colors duration-200 rounded-lg"
+                        :class="{ 'bg-gray-200': currentPath === item.href, 'hover:bg-gray-100': currentPath !== item.href }">
+                    {{ item.title }}
+                    </Link>
                 </nav>
             </aside>
 
-            <Separator class="my-6 md:hidden" />
+            <hr class="my-6 border-gray-300 md:hidden" />
 
             <div class="flex-1 md:max-w-2xl">
                 <section class="max-w-xl space-y-12">
