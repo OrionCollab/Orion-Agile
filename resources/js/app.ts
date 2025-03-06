@@ -1,3 +1,5 @@
+import '@fontsource-variable/inter';
+import '@fontsource-variable/onest';
 import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
