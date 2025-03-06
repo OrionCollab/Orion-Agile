@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { Head, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
-const page = usePage();
-const auth = computed(() => page.props.auth);
+import { Head } from '@inertiajs/vue3';
+
+import AppLayout from '@/layouts/AppLayout.vue';
+
+import Section from '@/components/Section.vue';
 </script>
 
 <template>
 
     <Head title="Inicio" />
-    <h1>HOME</h1>
-    <p>{{ auth.user.name }}</p>
-    <p>{{ auth.user.email }}</p>
+    <AppLayout>
+        <Section>
+            <p>Hola mundo</p>
+        </Section>
+    </AppLayout>
 </template>
