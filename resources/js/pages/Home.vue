@@ -3,15 +3,13 @@ import { Head } from '@inertiajs/vue3';
 
 import AppLayout from '@/layouts/AppLayout.vue';
 
-import Section from '@/components/Section.vue';
+import Content from '@/components/app/home/Content.vue';
 </script>
 
 <template>
 
     <Head title="Inicio" />
     <AppLayout>
-        <Section>
-            <p>Hola mundo</p>
-        </Section>
+        <Content />
     </AppLayout>
 </template>
