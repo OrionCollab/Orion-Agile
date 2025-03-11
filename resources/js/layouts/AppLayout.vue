@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import AppHeaderLayout from '@/layouts/app/AppHeaderLayout.vue';
+import AppSidebarLayout from '@/layouts/app/AppSidebarLayout.vue';
 </script>
 
 <template>
-    <AppHeaderLayout>
-        <main class="px-2 pt-16 mx-auto space-y-10 max-w-6xl">
+    <AppSidebarLayout>
+        <main class="py-4 md:pl-[75px] pl-4 pr-4">
             <slot />
         </main>
-    </AppHeaderLayout>
+    </AppSidebarLayout>
 </template>

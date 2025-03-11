@@ -15,7 +15,8 @@
     @inertiaHead
 </head>
 
-<body class="text-black bg-white">
+<body class="min-h-screen overflow-x-hidden text-white bg-neutral-900">
+    {{-- <x-background /> --}}
     @inertia
 </body>
 

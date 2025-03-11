@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::redirect('/', 'home');
 
-Route::get('home', function () {
-    return Inertia::render('Home');
-})->middleware(['auth', 'verified'])->name('home');
+Route::middleware(['auth'])->group(function () {
+    Route::get('home', [HomeController::class, 'index'])->name('home');
+
+    Route::post('home', [HomeController::class, 'newTask'])->name('task.store');
+});
 
 Route::get('error', function () {
     return Inertia::render('Restricted');
