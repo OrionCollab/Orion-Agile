@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\LogResource;
+use App\Models\Log;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +16,21 @@ class HomeController extends Controller
         $taskCount = Task::where('user_id', Auth::id())->count();
         $highPriorityTasks = Task::where('user_id', Auth::id())->where('priority', 1)->count();
 
+        $logs = LogResource::collection(Log::where('user_id', Auth::id())->take(10)->get())->toArray(request());
+
         return Inertia::render(
             'Home',
             [
                 'taskCount' => $taskCount,
-                'highPriorityTasks' => $highPriorityTasks
+                'highPriorityTasks' => $highPriorityTasks,
+                'logs' => $logs
             ]
         );
+    }
+
+    public function createTask()
+    {
+        return Inertia::render('tasks/Create');
     }
 
     public function newTask(Request $request)
@@ -52,6 +62,12 @@ class HomeController extends Controller
             'status' => $request->status,
         ]);
 
-        return to_route('home')->with('success', 'Tarea creada');;
+        Log::create([
+            'user_id' => Auth::id(),
+            'action' => "Nueva tarea creada",
+            'type' => 'success',
+        ]);
+
+        return to_route('home');
     }
 }

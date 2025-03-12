@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Head, useForm } from '@inertiajs/vue3';
-import { defineEmits } from 'vue';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     title: '',
@@ -11,27 +10,17 @@ const form = useForm({
 });
 
 const submitForm = () => {
-    form.post(route('task.store'), {
-        onSuccess: () => {
-            emit('close');
-            form.reset();
-        }
-    })
+    form.post(route('task.store'))
 }
-
-const emit = defineEmits(['close']);
-const closeForm = () => {
-    emit('close');
-};
 </script>
 
 <template>
 
-    <Head title="Create Task" />
-    <div class="fixed top-0 left-0 z-10 w-full h-screen backdrop-blur-lg">
+    <Head title="Crear Tarea" />
+    <div class="fixed top-0 left-0 z-10 w-full h-screen bg-neutral-900">
         <div class="flex items-center h-full max-w-lg mx-auto">
             <form @submit.prevent="submitForm"
-                class="flex flex-col w-full p-6 border rounded-3xl gap-y-4 bg-neutral-900 border-neutral-800">
+                class="flex flex-col w-full p-6 border rounded-md gap-y-4 bg-neutral-900 border-neutral-800">
                 <div class="space-y-2 text-center">
                     <h1 class="text-2xl font-bold">Crear tarea</h1>
                     <p class="text-sm text-neutral-500">Rellena el formulario para crear la tarea.</p>
@@ -85,10 +74,9 @@ const closeForm = () => {
                         class="px-4 py-2 text-sm font-medium transition-colors border rounded-md text-neutral-900 bg-neutral-100 hover:bg-neutral-100/80 border-neutral-800">
                         Crear tarea
                     </button>
-                    <button type="button" @click="closeForm"
-                        class="px-4 py-2 text-sm font-medium text-neutral-500 hover:underline">
-                        Cancelar
-                    </button>
+                    <Link :href="route('home')" class="px-4 py-2 text-sm font-medium text-neutral-500 hover:underline">
+                    Cancelar
+                    </Link>
                 </div>
             </form>
         </div>

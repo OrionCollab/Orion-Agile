@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('restrict');
             $table->string('action');
+            $table->enum('type', ['success', 'warning', 'error'])->default('success');
             $table->timestamps();
         });
     }

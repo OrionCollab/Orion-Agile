@@ -47,6 +47,15 @@ export interface Task {
     updated_at: string;
 }
 
+export interface Log {
+    id: number;
+    user_id: number;
+    action: string;
+    type: string;
+    created_at: string;
+    updated_at: string;
+}
+
 enum TaskStatus {
     pending = 'pending',
     inprogress = 'in_progress',

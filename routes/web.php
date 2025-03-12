@@ -10,6 +10,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
 
     Route::post('home', [HomeController::class, 'newTask'])->name('task.store');
+    Route::get('tasks/create', [HomeController::class, 'createTask'])->name('task.create');
 });
 
 Route::get('error', function () {
